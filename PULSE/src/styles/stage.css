@@ -1,0 +1,257 @@
+/* ───────────────────────── 기본 ───────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--vl-page);
+}
+a {
+  color: var(--vl-orange);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--vl-orange-dark);
+}
+
+/* ───────────────────────── 스테이지 ───────────────────────── */
+.vl-stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--vl-page);
+  font-family: var(--vl-font-sans);
+}
+.vl-canvas {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--vl-slide-w);
+  height: var(--vl-slide-h);
+  transform-origin: center center;
+}
+.vl-frame {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+}
+.vl-frame[data-active="true"] {
+  visibility: visible;
+}
+
+/* 하단 컨트롤 */
+.vl-hud {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: rgba(17, 17, 17, 0.82);
+  color: #e4e4e0;
+  font: 500 13px/1 var(--vl-font-display);
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 20;
+  backdrop-filter: blur(6px);
+}
+.vl-hud[data-visible="true"],
+.vl-hud:hover,
+.vl-hud:focus-within {
+  opacity: 1;
+}
+.vl-hud button {
+  all: unset;
+  cursor: pointer;
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: inherit;
+}
+.vl-hud button:hover,
+.vl-hud button:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+}
+.vl-hud__count {
+  min-width: 74px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.vl-hud__label {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #8a8a85;
+  font-family: var(--vl-font-sans);
+  padding-right: 6px;
+}
+
+/* 발표자 노트 */
+.vl-notes {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 34vh;
+  overflow: auto;
+  padding: 18px 28px 64px;
+  background: rgba(13, 13, 13, 0.94);
+  border-top: 2px solid var(--vl-orange);
+  color: #e4e4e0;
+  font: 400 17px/1.6 var(--vl-font-sans);
+  z-index: 15;
+  white-space: pre-wrap;
+}
+.vl-notes__head {
+  display: flex;
+  justify-content: space-between;
+  font: 500 12px/1 var(--vl-font-display);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--vl-orange);
+  margin-bottom: 10px;
+}
+.vl-notes__empty {
+  color: #6a6a66;
+}
+
+/* 개요(그리드) 모드 */
+.vl-overview {
+  position: fixed;
+  inset: 0;
+  overflow: auto;
+  z-index: 30;
+  background: var(--vl-page);
+  padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+  align-content: start;
+}
+.vl-thumb {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.vl-thumb__view {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  outline: 1px solid #262626;
+}
+.vl-thumb[data-current="true"] .vl-thumb__view,
+.vl-thumb:focus-visible .vl-thumb__view {
+  outline: 3px solid var(--vl-orange);
+}
+.vl-thumb__inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--vl-slide-w);
+  height: var(--vl-slide-h);
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+.vl-thumb__cap {
+  display: flex;
+  gap: 10px;
+  color: #8a8a85;
+  font: 400 13px/1.3 var(--vl-font-sans);
+}
+.vl-thumb__cap b {
+  font: 500 13px/1.3 var(--vl-font-display);
+  color: var(--vl-orange);
+}
+
+/* ───────────────────────── 슬라이드 ───────────────────────── */
+.vl-slide {
+  position: absolute;
+  inset: 0;
+  width: var(--vl-slide-w);
+  height: var(--vl-slide-h);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: var(--vl-pad-top) var(--vl-pad-x) var(--vl-pad-bottom);
+  font-family: var(--vl-font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+.vl-slide--light {
+  background: var(--vl-white);
+  color: var(--vl-ink);
+}
+.vl-slide--dark {
+  background: var(--vl-ink);
+  color: var(--vl-white);
+}
+.vl-slide--accent {
+  background: var(--vl-orange);
+  color: var(--vl-ink);
+}
+.vl-slide--bleed {
+  padding: 0;
+}
+.vl-slide p,
+.vl-slide h1,
+.vl-slide h2,
+.vl-slide h3 {
+  margin: 0;
+}
+
+/* ───────────────────────── 인쇄 (Ctrl+P → PDF) ───────────────────────── */
+@page {
+  size: 1920px 1080px;
+  margin: 0;
+}
+@media print {
+  *,
+  *::before,
+  *::after {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  html,
+  body {
+    background: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .vl-stage {
+    position: static;
+    overflow: visible;
+  }
+  .vl-canvas {
+    position: static;
+    transform: none !important;
+    width: auto;
+    height: auto;
+  }
+  .vl-frame {
+    position: relative;
+    visibility: visible !important;
+    width: var(--vl-slide-w);
+    height: var(--vl-slide-h);
+    break-after: page;
+    page-break-after: always;
+  }
+  .vl-frame:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+  .vl-hud,
+  .vl-notes,
+  .vl-overview {
+    display: none !important;
+  }
+}

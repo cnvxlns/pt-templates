@@ -1,0 +1,28 @@
+:root {
+  --vl-page: #06132a;
+  --vl-ink: #0b1e3d;
+  --vl-paper: #f2f6fb;
+  --vl-white: #fff;
+  --vl-orange: #3ac8ff;
+  --vl-orange-dark: #7fe3ff;
+  --vl-dark-surface: #0b1e3d;
+  --vl-dark-text: #f2f6fb;
+  --vl-font-sans: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --vl-font-display: "JetBrains Mono", ui-monospace, monospace;
+  --vl-slide-w: 1920px;
+  --vl-slide-h: 1080px;
+}
+
+.pulse-index {
+  max-width: 960px;
+  margin: auto;
+  padding: 72px 28px;
+  color: var(--vl-paper);
+  font-family: var(--vl-font-sans);
+}
+
+.pulse-index h1 { margin: 16px 0 40px; }
+.pulse-index ul { list-style: none; padding: 0; }
+.pulse-index li { border-top: 1px solid #3b5272; }
+.pulse-index a { display: grid; gap: 8px; padding: 20px 0; }
+.pulse-index a span { color: #a9c1e0; }

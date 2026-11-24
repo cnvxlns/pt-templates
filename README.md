@@ -9,6 +9,7 @@
 | 폴더 | 용도 |
 |---|---|
 | [`vialab/`](vialab/) | VIALab 랩 미팅 · 진행 보고 · 내부 세미나 |
+| [`PULSE/`](PULSE/) | PULSE 알고리즘 스터디 · 개념 강의 · 문제 풀이 |
 
 각 템플릿은 독립된 React + TypeScript 프로젝트다. 폴더에서 `npm install && npm run dev` 하면
 컴포넌트 카탈로그와 덱 목록이 뜬다.
