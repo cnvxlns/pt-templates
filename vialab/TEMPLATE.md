@@ -14,12 +14,21 @@ npm run dev                 # http://localhost:5173  → 컴포넌트 카탈로�
 
 ## 덱 만들기
 
-**사용자 발표는 `src/decks/private/<slug>.tsx` 에 만든다.** 이 폴더는 git 에서 제외되고,
-아래처럼 `meta` 를 내보내면 덱 목록에 자동으로 뜬다 (`registry.ts` 수정 불필요).
+**사용자 발표는 이 레포 밖, 발표 자료 폴더 안의 `deck/` 에 만든다** (예: `~/발표자료/<주제>/deck/<slug>.tsx`).
+이 레포에는 공통 컴포넌트만 둔다. 명령은 이 폴더에서 `DECK_DIR` 로 덱 폴더를 지정해 실행한다.
+
+```bash
+export DECK_DIR=~/발표자료/<주제>/deck
+npm run dev                 # 목록에 그 폴더의 덱만 뜬다 → ?deck=<slug>
+npm run build               # 타입체크(덱 포함) + 빌드 → $DECK_DIR/dist/
+```
+
+따로 둘 폴더가 없으면 `src/decks/private/<slug>.tsx` 에 둔다 (git 제외, `DECK_DIR` 없이 쓰는 기본 위치).
+어느 쪽이든 아래처럼 `meta` 를 내보내면 덱 목록에 자동으로 뜬다 (`registry.ts` 수정 불필요).
 
 ```tsx
 import { DeckStage, CoverSlide, ContentSlide, BulletList /* … */ } from "@/components";
-import type { DeckMeta } from "../registry";
+import type { DeckMeta } from "@/decks/registry";
 
 export const meta: DeckMeta = {
   slug: "topic-2026-12-01",          // 파일명과 같게. 주제-YYYY-MM-DD
@@ -39,8 +48,9 @@ export default function Deck() {
 ```
 
 - 슬라이드 구성의 출발점: `src/decks/template.tsx` (템플릿 원본 11장).
-- 그림·영상: `public/private/<slug>/` 에 두고 `"/private/<slug>/파일명"` 으로 참조 (git 제외).
+- 그림·영상: 덱 파일 옆 `assets/` 에 두고 import 한다 — `import fig from "./assets/fig.png"` → `<Figure src={fig} />`.
 - 보기: `npm run dev` → `http://localhost:5173/?deck=<slug>` (끝에 `#/5` 면 5번째 장).
+- `npm run typecheck` 가 덱 폴더에 `tsconfig.json` 을 만들어 둔다 (에디터가 `@/components` 를 찾게). 고치지 않는다.
 - 모든 슬라이드에 `label`(짧은 이름)을 주고, 말로 할 설명은 `notes` 에 쓴다.
 
 ## 컴포넌트
@@ -83,6 +93,8 @@ export default function Deck() {
 npm run check -- <slug> --shots        # 넘침·잘림 검사 + 슬라이드별 PNG (.deck-check/<slug>/NN.png)
 npm run check -- <slug> --pdf          # + 한 장당 한 페이지 PDF (.deck-check/<slug>.pdf)
 ```
+
+`DECK_DIR` 를 지정했으면 결과물은 `$DECK_DIR/.deck-check/` 에 나온다.
 
 "넘침·잘림 없음" 이 나올 때까지 고치고, PNG 를 직접 보고 빈 장·쏠린 배치·어색한 줄바꿈을 확인한다.
 Chrome 이 표준 위치에 없으면 `CHROME_PATH` 로 지정한다. 결과물(`.deck-check/`)은 git 제외.

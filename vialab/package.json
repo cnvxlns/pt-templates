@@ -5,9 +5,9 @@
   "description": "VIALab 발표 디자인 템플릿 (React + TypeScript + Vite)",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "node scripts/typecheck.mjs && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "node scripts/typecheck.mjs",
     "check": "node scripts/check-deck.mjs"
   },
   "dependencies": {

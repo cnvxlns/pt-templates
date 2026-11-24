@@ -41,7 +41,7 @@ src/
   decks/
     registry.ts           ← 공개 덱은 여기에 한 줄 등록
     template.tsx          원본 11장 템플릿 (새 덱 시작점)
-    private/              ← 비공개 덱 (git 에 안 올라감, 자동 등록)
+    private/              ← 비공개 덱 기본 위치 (git 제외, 자동 등록). DECK_DIR 를 주면 대신 그 폴더
   components/
     deck/DeckStage.tsx    스케일·키보드·노트·개요·인쇄
     deck/Slide.tsx        슬라이드 한 장 (tone: light | dark | accent)
@@ -62,9 +62,14 @@ public/
 
 1. `src/decks/template.tsx` 를 `src/decks/<slug>.tsx` 로 복사
 2. `src/decks/registry.ts` 의 `decks` 배열에 등록
-   - 내부 수치·IP·미결 사항이 들어간 발표는 대신 `src/decks/private/` 에 둔다.
-     git 에 올라가지 않고, `export const meta` 만 있으면 자동으로 목록에 뜬다 (`private/README.md`).
+   - 내부 수치·IP·미결 사항이 들어간 발표는 이 레포 밖 폴더에 두고 `DECK_DIR` 로 지정한다.
+     `export const meta` 만 있으면 자동으로 목록에 뜨고, 빌드 결과는 `$DECK_DIR/dist/` 에 나온다.
+     ```bash
+     DECK_DIR=~/발표자료/<주제>/deck npm run dev     # 또는 build, check
+     ```
+     따로 둘 폴더가 없으면 `src/decks/private/` (git 제외) 에 둔다 (`private/README.md`).
 3. 그림은 `public/decks/<slug>/` 에 두고 `<Figure src="/decks/<slug>/a.png" />`
+   (레포 밖 덱은 덱 옆 `assets/` 에 두고 `import fig from "./assets/a.png"`)
 
 모든 슬라이드 컴포넌트는 `label`(개요·하단 표시)과 `notes`(발표자 노트)를 받는다.
 

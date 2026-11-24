@@ -14,11 +14,12 @@ export interface DeckEntry extends DeckMeta {
 }
 
 /*
- * 비공개 덱: src/decks/private/*.tsx 는 git 에 올라가지 않는다 (.gitignore).
+ * 비공개 덱: `@decks` 폴더의 *.tsx. 환경변수 DECK_DIR 로 레포 밖 폴더를 지정하고,
+ * 없으면 src/decks/private/ (git 제외) 를 쓴다 (vite.config.ts).
  * 파일이 `export const meta: DeckMeta` 와 `export default` 컴포넌트를 내보내면 자동으로 목록에 뜬다.
- * 내부 수치·IP·미결 사항이 들어간 발표는 여기에 둔다.
+ * 내부 수치·IP·미결 사항이 들어간 발표는 이렇게 레포 밖(또는 private/)에 둔다.
  */
-const privateModules = import.meta.glob<{ default: ComponentType; meta: DeckMeta }>("./private/*.tsx", { eager: true });
+const privateModules = import.meta.glob<{ default: ComponentType; meta: DeckMeta }>("@decks/*.tsx", { eager: true });
 const privateDecks: DeckEntry[] = Object.values(privateModules)
   .filter((m) => m.meta && m.default)
   .map((m) => ({ ...m.meta, Deck: m.default }))
