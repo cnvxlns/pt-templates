@@ -16,3 +16,5 @@ export default function MyReport() {
 ```
 
 주소: `?deck=my-report`
+
+그림은 `public/private/my-report/` 에 두고 `"/private/my-report/fig.png"` 로 참조한다 (역시 git 제외).

@@ -1,0 +1,7 @@
+{
+  "name": "pt-templates",
+  "description": "발표자료(슬라이드 덱) 템플릿 모음과, 그걸로 덱을 만들고 검사하는 make-slides 스킬",
+  "author": { "name": "cnvxlns" },
+  "repository": "https://github.com/cnvxlns/pt-templates",
+  "keywords": ["slides", "presentation", "deck", "react", "발표자료"]
+}

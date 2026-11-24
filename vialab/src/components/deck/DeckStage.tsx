@@ -12,6 +12,7 @@ import {
 } from "react";
 import { SLIDE_H, SLIDE_W } from "../tokens";
 import type { SlideMeta } from "./Slide";
+import { runCheck } from "./checkLayout";
 
 /** Fragment 를 풀어서 슬라이드 요소 목록으로 만든다. */
 function flattenSlides(children: ReactNode): ReactElement<SlideMeta>[] {
@@ -60,6 +61,8 @@ export function DeckStage({ title, children }: DeckStageProps) {
   const [hud, setHud] = useState(true);
   const [notesOpen, setNotesOpen] = useState(false);
   const [overview, setOverview] = useState(false);
+  // ?capture : 스크린샷·PDF 용. 하단 컨트롤을 그리지 않는다.
+  const [capture] = useState(() => new URLSearchParams(window.location.search).has("capture"));
   const hudTimer = useRef<number | undefined>(undefined);
 
   const go = useCallback(
@@ -81,6 +84,11 @@ export function DeckStage({ title, children }: DeckStageProps) {
   useEffect(() => {
     if (title) document.title = title;
   }, [title]);
+
+  // ?check : 모든 슬라이드의 넘침·잘림을 검사해 결과를 DOM 에 남긴다 (scripts/check-deck.mjs)
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).has("check")) void runCheck();
+  }, []);
 
   // 화면에 맞춰 축소/확대 (레터박스)
   useEffect(() => {
@@ -203,6 +211,7 @@ export function DeckStage({ title, children }: DeckStageProps) {
         </aside>
       )}
 
+      {!capture && (
       <nav className="vl-hud" data-visible={hud} aria-label="슬라이드 이동">
         <button type="button" onClick={() => go(index - 1)} aria-label="이전 슬라이드">
           ←
@@ -221,6 +230,7 @@ export function DeckStage({ title, children }: DeckStageProps) {
           N
         </button>
       </nav>
+      )}
 
       {overview && (
         <Overview

@@ -1,5 +1,7 @@
 # VIALab Slides
 
+> Claude Code 스킬(`make-slides`)이 읽는 사용법은 [`TEMPLATE.md`](TEMPLATE.md) 에 있다.
+
 VIALab-Template.html 디자인을 그대로 옮긴 **React + TypeScript** 발표 템플릿 (빌드 도구: Vite).
 슬라이드는 1920×1080 캔버스이고, 화면 크기에 맞춰 자동으로 축소·확대된다.
 
@@ -9,6 +11,7 @@ npm run dev        # http://localhost:5173  → 컴포넌트 카탈로그 + 덱 
 npm run build      # 타입체크 + 정적 빌드 → dist/
 npm run preview    # dist/ 를 로컬 서버로 띄움
 npm run typecheck
+npm run check -- <slug> --shots --pdf   # 넘침·잘림 검사 + 스크린샷 + PDF (.deck-check/)
 ```
 
 ## 발표 조작
