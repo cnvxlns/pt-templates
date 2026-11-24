@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+# 비공개 덱 (내부 수치·IP·미결 사항). 안내 파일만 올린다.
+src/decks/private/*
+!src/decks/private/README.md

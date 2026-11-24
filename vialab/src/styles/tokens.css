@@ -1,0 +1,46 @@
+/*
+ * VIALab 디자인 토큰 — VIALab-Template.html 에서 쓰던 값을 그대로 옮겼다.
+ * 새 색/크기를 하드코딩하지 말고 여기 변수를 쓴다. (TS 쪽 사본: src/components/tokens.ts)
+ */
+:root {
+  /* 브랜드 */
+  --vl-orange: #f5821f;
+  --vl-orange-dark: #c96812;
+  --vl-orange-ink: #4a2a08; /* 오렌지 배경 위 보조 텍스트 */
+  --vl-orange-tint: #fdf0e4; /* 오렌지 아주 옅은 면 */
+
+  /* 무채색 */
+  --vl-ink: #111111;
+  --vl-white: #ffffff;
+  --vl-body: #4a4a48; /* 리드 문단 */
+  --vl-subtle: #6b6b66; /* 표 머리, 보조 설명 */
+  --vl-muted: #8a8a85; /* 부제, 날짜 */
+  --vl-track: #dcdcd8; /* 진행 전 타임라인 바 */
+  --vl-line: #e4e4e0; /* 구분선 */
+  --vl-paper: #f3f3f0; /* 옅은 면, 빗금 */
+  --vl-page: #0d0d0d; /* 슬라이드 바깥 배경 */
+
+  /* 어두운 슬라이드 */
+  --vl-dark-surface: #1b1b1b;
+  --vl-dark-hatch: #151515;
+  --vl-dark-line: #333330;
+  --vl-dark-text: #e4e4e0;
+  --vl-dark-sub: #c9c9c4;
+  --vl-dark-muted: #6a6a66;
+
+  /* 상태 (Badge/Checklist 에서만 절제해서 사용) */
+  --vl-pass: #2f7d4f;
+  --vl-fail: #c2362b;
+
+  /* 서체 */
+  --vl-font-sans: "IBM Plex Sans KR", sans-serif;
+  --vl-font-display: "Space Grotesk", "IBM Plex Sans KR", sans-serif;
+  --vl-font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, "DejaVu Sans Mono", "Liberation Mono", "Noto Sans Mono", monospace;
+
+  /* 레이아웃 (1920×1080 캔버스 기준 px) */
+  --vl-slide-w: 1920px;
+  --vl-slide-h: 1080px;
+  --vl-pad-top: 100px;
+  --vl-pad-x: 110px;
+  --vl-pad-bottom: 80px;
+}

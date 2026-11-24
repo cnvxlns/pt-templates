@@ -1,0 +1,104 @@
+/*
+ * VIALab-Template.html 의 11장을 컴포넌트로 재현한 원본 템플릿.
+ * 새 발표를 시작할 때 이 파일을 복사해서 src/decks/ 에 두고 registry.ts 에 등록한다.
+ */
+import {
+  AgendaSlide,
+  BulletList,
+  ClosingSlide,
+  ContentSlide,
+  CoverSlide,
+  DataTable,
+  DeckStage,
+  FullBleedSlide,
+  Lead,
+  Placeholder,
+  SectionSlide,
+  SplitSlide,
+  Stat,
+  StatGrid,
+  StatementSlide,
+  Timeline,
+} from "@/components";
+
+export default function TemplateDeck() {
+  return (
+    <DeckStage title="VIALab · Lab Meeting Template">
+      <CoverSlide
+        label="표지"
+        notes="발표 제목, 발표자, 날짜만 남기고 간결하게."
+        title="발표 제목을 입력합니다"
+        subtitle="부제 또는 한 줄 요약"
+        presenter="홍길동 · 박사과정"
+        date="2026.09.18"
+      />
+
+      <AgendaSlide label="목차" notes="네 항목 이내로 유지." items={["연구 배경", "제안 방법", "실험 결과", "향후 계획"]} />
+
+      <SectionSlide label="섹션 구분" notes="섹션 전환용. 번호와 제목만." number="01" title="연구 배경" description="이 섹션에서 다룰 내용을 한 줄로 적습니다." />
+
+      <ContentSlide label="본문 · 텍스트" notes="항목은 세 개 이내, 한 줄씩." title="핵심 내용" gap={80}>
+        <BulletList items={["첫 번째 요점을 한 문장으로 적습니다.", "두 번째 요점을 한 문장으로 적습니다.", "세 번째 요점을 한 문장으로 적습니다."]} />
+      </ContentSlide>
+
+      <SplitSlide
+        label="본문 · 2단"
+        notes="왼쪽 설명, 오른쪽 그림. 도식이나 실험 셋업 이미지를 넣습니다."
+        title="제안 방법"
+        aside={<Placeholder label="system diagram" height={720} />}
+      >
+        <Lead>구조나 파이프라인을 두세 문장으로 설명합니다. 세부 수식은 부록으로 옮기고 여기서는 흐름만 남깁니다.</Lead>
+      </SplitSlide>
+
+      <FullBleedSlide
+        label="전체 이미지"
+        notes="주행 영상 캡처나 정성 결과를 꽉 차게."
+        title="정성 결과"
+        caption="장면 설명을 한 줄로 적습니다."
+        media={<Placeholder dark label="driving scene / qualitative result" style={{ flex: 1 }} />}
+      />
+
+      <ContentSlide label="수치 강조" notes="지표는 세 개까지." title="정량 결과" gap={110}>
+        <StatGrid columns={3}>
+          <Stat accent value="92.4" label="mAP" note="기존 대비 +3.1" />
+          <Stat value="18ms" label="추론 지연" note="RTX 4090 기준" />
+          <Stat value="4.2k" label="주행 시나리오" note="자체 수집 데이터셋" />
+        </StatGrid>
+      </ContentSlide>
+
+      <ContentSlide label="비교 표" notes="열은 네 개 이내로." title="방법 비교" gap={80}>
+        <DataTable
+          columns={[
+            "방법",
+            { header: "정확도", align: "right", num: true },
+            { header: "지연", align: "right", num: true },
+            { header: "파라미터", align: "right", num: true },
+          ]}
+          rows={[
+            ["Baseline A", "89.3", "24ms", "31M"],
+            ["Baseline B", "90.1", "21ms", "28M"],
+            ["Ours", "92.4", "18ms", "24M"],
+          ]}
+          highlight={[2]}
+        />
+      </ContentSlide>
+
+      <ContentSlide label="진행 일정" notes="주 단위 계획. 항목 네 개." title="향후 계획" gap={120}>
+        <Timeline
+          items={[
+            { period: "WEEK 1–2", title: "데이터 정제", state: "active" },
+            { period: "WEEK 3–4", title: "모델 학습", state: "done" },
+            { period: "WEEK 5–6", title: "차량 실험" },
+            { period: "WEEK 7–8", title: "논문 작성" },
+          ]}
+        />
+      </ContentSlide>
+
+      <StatementSlide label="핵심 문장" notes="한 장에 한 문장만." source="Reference / Source">
+        강조하고 싶은 한 문장을 이 자리에 둡니다.
+      </StatementSlide>
+
+      <ClosingSlide label="마무리" notes="논의하고 싶은 질문 두세 개." questions={["첫 번째 질문", "두 번째 질문"]} />
+    </DeckStage>
+  );
+}
