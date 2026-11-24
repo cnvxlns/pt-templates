@@ -97,6 +97,8 @@ export interface Column {
   num?: boolean;
   /** 고정폭 (경로·식별자) */
   mono?: boolean;
+  /** 열 전체를 옅은 오렌지 면으로 강조 (예: 여러 층 중 "여기를 고친다") */
+  emphasis?: boolean;
   width?: number | string;
 }
 
@@ -121,13 +123,17 @@ export function DataTable({
 }) {
   const cols: Column[] = columns.map((c) => (typeof c === "string" ? { header: c } : c));
   const cellClass = (c: Column) =>
-    cx(c.align === "right" && "is-right", c.align === "center" && "is-center", c.num && "is-num", c.mono && "is-mono");
+    cx(c.align === "right" && "is-right", c.align === "center" && "is-center", c.num && "is-num", c.mono && "is-mono", c.emphasis && "is-emphasis");
   return (
     <table className={cx("vl-table", compact && "vl-table--compact", className)} style={style}>
       <thead>
         <tr>
           {cols.map((c, i) => (
-            <th key={i} className={cx(c.align === "right" && "is-right", c.align === "center" && "is-center")} style={{ width: c.width }}>
+            <th
+              key={i}
+              className={cx(c.align === "right" && "is-right", c.align === "center" && "is-center", c.emphasis && "is-emphasis")}
+              style={{ width: c.width }}
+            >
               {c.header}
             </th>
           ))}

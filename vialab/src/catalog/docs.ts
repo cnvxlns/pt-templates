@@ -204,7 +204,7 @@ export const DOCS: ComponentDoc[] = [
     frame: "block",
     summary: "비교 표. 강조 행은 오렌지 (템플릿의 “Ours” 행).",
     props: [
-      { name: "columns", type: "(string | { header, align?, num?, mono?, width? })[]", required: true, desc: "num: 숫자 서체, mono: 경로·식별자" },
+      { name: "columns", type: "(string | { header, align?, num?, mono?, emphasis?, width? })[]", required: true, desc: "num: 숫자 서체, mono: 경로·식별자, emphasis: 열 전체 옅은 오렌지 강조" },
       { name: "rows", type: "ReactNode[][]", required: true, desc: "" },
       { name: "highlight", type: "number[]", desc: "오렌지로 강조할 행 번호 (0부터)" },
       { name: "muted", type: "number[]", desc: "흐리게 할 행 번호" },

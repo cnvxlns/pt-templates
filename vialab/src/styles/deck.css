@@ -573,6 +573,14 @@ a:hover {
 .vl-table tr.is-muted td {
   color: var(--vl-muted);
 }
+/* 열 강조: 옅은 오렌지 면 + 머리 오렌지 */
+.vl-table .is-emphasis {
+  background: var(--vl-orange-tint);
+}
+.vl-table th.is-emphasis {
+  color: var(--vl-orange-dark);
+  border-bottom-color: var(--vl-orange);
+}
 .vl-slide--dark .vl-table th {
   color: var(--vl-muted);
   border-color: var(--vl-white);
