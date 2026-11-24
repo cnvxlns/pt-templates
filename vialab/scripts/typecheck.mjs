@@ -7,7 +7,7 @@
  */
 import { spawnSync } from "node:child_process";
 import { existsSync, writeFileSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -42,7 +42,7 @@ if (process.env.DECK_DIR) {
   };
   writeFileSync(
     join(deckDir, "tsconfig.json"),
-    `// pt-templates/vialab 의 npm run typecheck 가 만든 파일. 고치지 않는다.\n${JSON.stringify(tsconfig, null, 2)}\n`,
+    `// pt-templates/${basename(root)} 의 npm run typecheck 가 만든 파일. 고치지 않는다.\n${JSON.stringify(tsconfig, null, 2)}\n`,
   );
   run(["-p", deckDir, "--noEmit"]);
 }

@@ -7,6 +7,8 @@
  *   npm run check -- <slug> --pdf [file]         한 장당 한 페이지 PDF (기본 .deck-check/<slug>.pdf)
  *   npm run check -- <slug> --no-build           이미 빌드한 dist/ 를 그대로 사용
  *
+ * DECK_DIR 를 지정하면 그 폴더의 덱을 검사하고, 결과물은 <DECK_DIR>/.deck-check/ 에 둔다.
+ *
  * Chrome 위치는 CHROME_PATH 로 지정할 수 있다. 문제가 있으면 exit code 1.
  */
 import { spawn, spawnSync } from "node:child_process";
@@ -29,8 +31,10 @@ const optValue = (flag, fallback) => {
   const next = args[i + 1];
   return next && !next.startsWith("--") && next !== slug ? next : fallback;
 };
-const shotsDir = optValue("--shots", join(root, ".deck-check", slug));
-const pdfFile = optValue("--pdf", join(root, ".deck-check", `${slug}.pdf`));
+const deckDir = process.env.DECK_DIR ? resolve(process.env.DECK_DIR) : undefined;
+const outBase = join(deckDir ?? root, ".deck-check");
+const shotsDir = optValue("--shots", join(outBase, slug));
+const pdfFile = optValue("--pdf", join(outBase, `${slug}.pdf`));
 const noBuild = args.includes("--no-build");
 
 /* ── Chrome ── */
@@ -126,7 +130,8 @@ async function main() {
   const dom = chrome(["--dump-dom"], `${base}/?deck=${encodeURIComponent(slug)}&check&capture#/1`);
   const m = dom.match(/<script[^>]*\bid="vl-check"[^>]*>([\s\S]*?)<\/script>/);
   if (!m) {
-    console.error(`덱 '${slug}' 을 찾지 못했다. src/decks/registry.ts 또는 src/decks/private/ 를 확인한다.`);
+    const where = deckDir ? `DECK_DIR (${deckDir})` : "src/decks/registry.ts 또는 src/decks/private/";
+    console.error(`덱 '${slug}' 을 찾지 못했다. ${where} 를 확인한다.`);
     process.exit(2);
   }
   const result = JSON.parse(m[1]);

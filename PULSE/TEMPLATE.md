@@ -9,10 +9,20 @@ description: PULSE 알고리즘 스터디의 개념 강의·문제 풀이·주�
 
 ## 덱 작성
 
-`src/decks/template.tsx`를 `src/decks/private/<slug>.tsx`로 복사해 시작한다. 같은 파일에서 아래 형식으로 목록 정보를 내보내면 자동 등록된다.
+`src/decks/template.tsx`를 발표 자료 폴더 안의 `deck/<slug>.tsx`로 복사해 시작한다 (이 레포 밖).
+명령은 이 폴더에서 `DECK_DIR`로 덱 폴더를 지정해 실행한다.
+
+```sh
+export DECK_DIR=~/발표자료/<주제>/deck
+npm run dev      # 목록에 그 폴더의 덱만 뜬다
+npm run build    # 타입체크(덱 포함) + 빌드 → $DECK_DIR/dist/
+```
+
+따로 둘 폴더가 없으면 `src/decks/private/<slug>.tsx`에 둔다 (Git 제외, `DECK_DIR` 없이 쓰는 기본 위치).
+어느 쪽이든 아래 형식으로 목록 정보를 내보내면 자동 등록된다.
 
 ```tsx
-import type { DeckMeta } from "../registry";
+import type { DeckMeta } from "@/decks/registry";
 
 export const meta: DeckMeta = {
   slug: "prefix-sums",
@@ -26,7 +36,10 @@ export const meta: DeckMeta = {
 - `ContentSlide`에 제목과 본문을 넣는다. `pulse-grid` 안에서 `Panel` 두 개를 비교하고, 한쪽에만 `accent`를 준다.
 - 수식과 큰 숫자는 `pulse-formula`, 비교 표는 `pulse-table`, 절차는 `ol.pulse-flow`, 핵심 요점은 `pulse-callout`을 쓴다.
 - 스타일과 색상은 `src/styles/pulse.css`의 토큰을 사용한다. 표나 본문이 길면 장을 나눈다.
-- 개인 발표 자료는 `src/decks/private/`에, 그림은 `public/private/<slug>/`에 둔다. 그림 URL은 `/private/<slug>/파일명`이다. 두 경로 모두 Git에서 제외한다. 빌드 결과를 공유하면 로컬 덱도 포함되므로 배포 전에 포함할 덱을 확인한다.
+- 그림은 덱 파일 옆 `assets/`에 두고 import 한다: `import fig from "./assets/fig.png"` → `<img src={fig} />`.
+  (`src/decks/private/`의 덱은 `public/private/<slug>/`에 두고 `/private/<slug>/파일명`으로 참조한다. 둘 다 Git 제외.)
+- `npm run typecheck`가 덱 폴더에 `tsconfig.json`을 만들어 둔다 (에디터가 `@/components`를 찾게). 고치지 않는다.
+- `DECK_DIR` 없이 빌드하면 `src/decks/private/`의 덱이 빌드 결과에 포함되므로 배포 전에 포함할 덱을 확인한다.
 
 ## 발표 및 검사
 
@@ -39,4 +52,4 @@ npm run build
 npm run check -- <slug> --shots --pdf
 ```
 
-검사기는 Chrome 또는 Chromium으로 넘침·잘림을 확인한다. 필요하면 `CHROME_PATH`를 지정한다. 스크린샷과 16:9 PDF는 `.deck-check/`에 저장된다.
+검사기는 Chrome 또는 Chromium으로 넘침·잘림을 확인한다. 필요하면 `CHROME_PATH`를 지정한다. 스크린샷과 16:9 PDF는 `.deck-check/`에 저장된다 (`DECK_DIR`를 지정했으면 `$DECK_DIR/.deck-check/`).
