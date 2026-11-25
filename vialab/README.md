@@ -21,7 +21,6 @@ npm run check -- <slug> --shots --pdf   # 넘침·잘림 검사 + 스크린샷 +
 | → ↓ Space PageDown / ← ↑ PageUp | 다음 / 이전 |
 | Home / End, R | 처음·끝, 처음으로 |
 | G 또는 Esc | 전체 보기(그리드) — 클릭해서 이동 |
-| N | 발표자 노트 |
 | F | 전체 화면 |
 | Ctrl/Cmd + P | 한 장당 한 페이지 PDF (배경 그래픽 켜기) |
 
@@ -43,7 +42,7 @@ src/
     template.tsx          원본 11장 템플릿 (새 덱 시작점)
     private/              ← 비공개 덱 기본 위치 (git 제외, 자동 등록). DECK_DIR 를 주면 대신 그 폴더
   components/
-    deck/DeckStage.tsx    스케일·키보드·노트·개요·인쇄
+    deck/DeckStage.tsx    스케일·키보드·개요·인쇄
     deck/Slide.tsx        슬라이드 한 장 (tone: light | dark | accent)
     layouts.tsx           템플릿 11유형 레이아웃
     content.tsx           본문 컴포넌트
@@ -71,7 +70,7 @@ public/
 3. 그림은 `public/decks/<slug>/` 에 두고 `<Figure src="/decks/<slug>/a.png" />`
    (레포 밖 덱은 덱 옆 `assets/` 에 두고 `import fig from "./assets/a.png"`)
 
-모든 슬라이드 컴포넌트는 `label`(개요·하단 표시)과 `notes`(발표자 노트)를 받는다.
+모든 슬라이드 컴포넌트는 `label`(개요·하단 표시)을 받는다.
 
 ## 컴포넌트
 
@@ -88,7 +87,7 @@ public/
 | `CoverSlide` | 01 표지 | title, subtitle, presenter, date, event |
 | `AgendaSlide` | 02 목차 | items (4개 이내) |
 | `SectionSlide` | 03 섹션 구분 | number, title, description |
-| `ContentSlide` | 04·07·08·09 | 헤더(eyebrow+제목+로고) + 자유 본문. `aside` 로 로고 대신 Badge |
+| `ContentSlide` | 04·07·08·09 | 헤더(제목+로고) + 자유 본문. `aside` 로 로고 대신 Badge |
 | `SplitSlide` | 05 2단 | 왼쪽 설명, `aside` 에 그림 |
 | `FullBleedSlide` | 06 전체 이미지 | `media` 에 Figure/Placeholder |
 | `StatementSlide` | 10 핵심 문장 | 한 문장 + source |

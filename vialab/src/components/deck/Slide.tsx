@@ -5,8 +5,6 @@ import { cx } from "../tokens";
 export interface SlideMeta {
   /** 개요 화면·하단 컨트롤에 표시되는 짧은 이름 */
   label?: string;
-  /** 발표자 노트 (N 키) */
-  notes?: string;
 }
 
 export type SlideTone = "light" | "dark" | "accent";

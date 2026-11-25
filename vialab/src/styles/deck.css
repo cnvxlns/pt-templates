@@ -94,35 +94,6 @@ a:hover {
   padding-right: 6px;
 }
 
-/* 발표자 노트 */
-.vl-notes {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  max-height: 34vh;
-  overflow: auto;
-  padding: 18px 28px 64px;
-  background: rgba(13, 13, 13, 0.94);
-  border-top: 2px solid var(--vl-orange);
-  color: #e4e4e0;
-  font: 400 17px/1.6 var(--vl-font-sans);
-  z-index: 15;
-  white-space: pre-wrap;
-}
-.vl-notes__head {
-  display: flex;
-  justify-content: space-between;
-  font: 500 12px/1 var(--vl-font-display);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--vl-orange);
-  margin-bottom: 10px;
-}
-.vl-notes__empty {
-  color: #6a6a66;
-}
-
 /* 개요(그리드) 모드 */
 .vl-overview {
   position: fixed;
@@ -349,11 +320,6 @@ a:hover {
 }
 .vl-slide--dark .vl-header {
   border-color: var(--vl-dark-line);
-}
-.vl-header__titles {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
 }
 .vl-body {
   display: flex;
@@ -1189,7 +1155,6 @@ a:hover {
     page-break-after: auto;
   }
   .vl-hud,
-  .vl-notes,
   .vl-overview {
     display: none !important;
   }

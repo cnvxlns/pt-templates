@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { Slide, type SlideMeta, type SlideTone } from "./deck/Slide";
-import { AccentBar, Eyebrow, H1, H2, Logo } from "./primitives";
+import { AccentBar, H1, H2, Logo } from "./primitives";
 import { IndexList, type IndexItem } from "./content";
 
 /*
@@ -13,14 +13,11 @@ import { IndexList, type IndexItem } from "./content";
 
 /* ── 공통 헤더 ─────────────────────────────────── */
 
-/** 본문 슬라이드 상단: (eyebrow) + 제목 · 오른쪽 작은 로고 · 아래 구분선 */
-export function SlideHeader({ title, eyebrow, logo = true, aside }: { title: ReactNode; eyebrow?: ReactNode; logo?: boolean; aside?: ReactNode }) {
+/** 본문 슬라이드 상단: 제목 · 오른쪽 작은 로고 · 아래 구분선 */
+export function SlideHeader({ title, logo = true, aside }: { title: ReactNode; logo?: boolean; aside?: ReactNode }) {
   return (
     <header className="vl-header">
-      <div className="vl-header__titles">
-        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-        <H2>{title}</H2>
-      </div>
+      <H2>{title}</H2>
       {aside ?? (logo && <Logo width={150} style={{ marginBottom: 12 }} />)}
     </header>
   );
@@ -109,7 +106,6 @@ export function SectionSlide({
 
 export interface ContentSlideProps extends SlideMeta {
   title: ReactNode;
-  eyebrow?: ReactNode;
   tone?: SlideTone;
   logo?: boolean;
   /** 헤더 오른쪽을 로고 대신 다른 것(배지 등)으로 */
@@ -121,10 +117,10 @@ export interface ContentSlideProps extends SlideMeta {
 }
 
 /** 가장 많이 쓰는 형태: 헤더 + 자유 본문. 본문 영역은 남은 높이를 채우는 세로 flex. */
-export function ContentSlide({ title, eyebrow, tone = "light", logo = true, aside, gap, bodyStyle, children, ...meta }: ContentSlideProps) {
+export function ContentSlide({ title, tone = "light", logo = true, aside, gap, bodyStyle, children, ...meta }: ContentSlideProps) {
   return (
     <Slide {...meta} tone={tone}>
-      <SlideHeader title={title} eyebrow={eyebrow} logo={logo && tone === "light"} aside={aside} />
+      <SlideHeader title={title} logo={logo && tone === "light"} aside={aside} />
       <div className="vl-body" style={{ marginTop: gap, ...bodyStyle }}>
         {children}
       </div>
@@ -136,7 +132,6 @@ export function ContentSlide({ title, eyebrow, tone = "light", logo = true, asid
 
 export function SplitSlide({
   title,
-  eyebrow,
   children,
   aside,
   ratio = "1fr 1fr",
@@ -144,7 +139,6 @@ export function SplitSlide({
   ...meta
 }: SlideMeta & {
   title: ReactNode;
-  eyebrow?: ReactNode;
   /** 왼쪽 설명 (Lead, BulletList 등) */
   children?: ReactNode;
   /** 오른쪽 그림/도식 */
@@ -155,7 +149,6 @@ export function SplitSlide({
   const text = (
     <div className="vl-stack" style={{ gap: 36 }}>
       <AccentBar />
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <H2>{title}</H2>
       {children}
     </div>

@@ -122,7 +122,6 @@ const KEYS: [string, string][] = [
   ["← ↑ PageUp", "이전"],
   ["Home / End · R", "처음 / 끝 · 처음으로"],
   ["G 또는 Esc", "전체 보기 (그리드)"],
-  ["N", "발표자 노트"],
   ["F", "전체 화면"],
   ["Ctrl/Cmd + P", "한 장당 한 페이지 PDF"],
 ];
@@ -134,7 +133,7 @@ export default function MyTalk() {
   return (
     <DeckStage title="발표 제목">
       <CoverSlide label="표지" title="발표 제목" presenter="이름 · 과정" date="2026.12.01" />
-      <ContentSlide label="요약" title="한 줄 요약" notes="발표자 노트">
+      <ContentSlide label="요약" title="한 줄 요약">
         <BulletList items={["요점 하나", "요점 둘"]} />
       </ContentSlide>
     </DeckStage>
@@ -167,7 +166,7 @@ function QuickStart() {
             </tbody>
           </table>
           <p className="cat-note">
-            주소 끝 <code>#/5</code> 는 5번째 슬라이드. 모든 슬라이드 컴포넌트는 <code>label</code>·<code>notes</code> 를 받는다.
+            주소 끝 <code>#/5</code> 는 5번째 슬라이드. 모든 슬라이드 컴포넌트는 <code>label</code>을 받는다.
           </p>
         </div>
       </div>

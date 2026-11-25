@@ -10,7 +10,7 @@ export function AccentBar({ width = 64, color, style }: { width?: number | strin
   return <div className="vl-accent-bar" style={{ width, background: color, ...style }} aria-hidden />;
 }
 
-/** 제목 위 작은 영문 라벨 (예: "issue 01", "core design"). */
+/** 본문이나 도표에 쓰는 작은 라벨. */
 export function Eyebrow({ muted, className, style, children }: Base & { muted?: boolean }) {
   return (
     <span className={cx("vl-eyebrow", muted && "vl-eyebrow--muted", className)} style={style}>

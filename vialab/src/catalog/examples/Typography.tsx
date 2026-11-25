@@ -4,7 +4,7 @@ export default function Example() {
   return (
     <Stack gap={28}>
       <AccentBar />
-      <Eyebrow>Eyebrow — 제목 위 영문 라벨</Eyebrow>
+      <Eyebrow muted>Eyebrow — 본문 보조 라벨</Eyebrow>
       <H1>H1 표지 제목 104</H1>
       <H2>H2 슬라이드 제목 64</H2>
       <H3>H3 소제목 40</H3>

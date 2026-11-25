@@ -4,10 +4,8 @@ export default function Example() {
   return (
     <ContentSlide
       label="핵심 내용"
-      eyebrow="method"
       title="핵심 내용"
       aside={<Badge status="pass">검증 완료</Badge>}
-      notes="발표자 노트는 N 키로 연다."
     >
       <BulletList
         items={[

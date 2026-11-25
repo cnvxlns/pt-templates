@@ -51,7 +51,7 @@ export default function Deck() {
 - 그림·영상: 덱 파일 옆 `assets/` 에 두고 import 한다 — `import fig from "./assets/fig.png"` → `<Figure src={fig} />`.
 - 보기: `npm run dev` → `http://localhost:5173/?deck=<slug>` (끝에 `#/5` 면 5번째 장).
 - `npm run typecheck` 가 덱 폴더에 `tsconfig.json` 을 만들어 둔다 (에디터가 `@/components` 를 찾게). 고치지 않는다.
-- 모든 슬라이드에 `label`(짧은 이름)을 주고, 말로 할 설명은 `notes` 에 쓴다.
+- 모든 슬라이드에 `label`(짧은 이름)을 준다.
 
 ## 컴포넌트
 

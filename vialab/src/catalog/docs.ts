@@ -34,7 +34,6 @@ export interface ComponentDoc {
 
 const META: PropDoc[] = [
   { name: "label", type: "string", desc: "전체 보기(G)·하단 컨트롤에 표시되는 짧은 이름" },
-  { name: "notes", type: "string", desc: "발표자 노트 (N 키)" },
 ];
 
 export const DOCS: ComponentDoc[] = [
@@ -81,10 +80,9 @@ export const DOCS: ComponentDoc[] = [
     id: "ContentSlide",
     group: "layout",
     frame: "slide",
-    summary: "가장 많이 쓰는 본문 슬라이드. 헤더(eyebrow + 제목 + 로고) 아래에 자유롭게 본문을 넣는다.",
+    summary: "가장 많이 쓰는 본문 슬라이드. 헤더(제목 + 로고) 아래에 자유롭게 본문을 넣는다.",
     props: [
       { name: "title", type: "ReactNode", required: true, desc: "64px 제목" },
-      { name: "eyebrow", type: "ReactNode", desc: '제목 위 오렌지 영문 라벨 (예: "issue 01")' },
       { name: "children", type: "ReactNode", desc: "본문. 남은 높이를 채우는 세로 flex 영역" },
       { name: "aside", type: "ReactNode", desc: "헤더 오른쪽을 로고 대신 이것으로 (Badge 등)" },
       { name: "gap", type: "number", default: "72", desc: "헤더와 본문 사이 간격(px)" },
@@ -103,7 +101,6 @@ export const DOCS: ComponentDoc[] = [
       { name: "title", type: "ReactNode", required: true, desc: "" },
       { name: "aside", type: "ReactNode", required: true, desc: "오른쪽 (Figure, Placeholder, CodeBlock…)" },
       { name: "children", type: "ReactNode", desc: "왼쪽 설명 (Lead, BulletList…)" },
-      { name: "eyebrow", type: "ReactNode", desc: "" },
       { name: "ratio", type: "string", default: '"1fr 1fr"', desc: "grid-template-columns" },
       { name: "reverse", type: "boolean", desc: "그림을 왼쪽으로" },
       ...META,
@@ -351,7 +348,7 @@ export const DOCS: ComponentDoc[] = [
     summary: "글자 요소. 크기·색이 템플릿 값으로 고정돼 있어 직접 font-size 를 줄 필요가 없다.",
     props: [
       { name: "AccentBar", type: "{ width?, color? }", default: "width 64", desc: "제목 위 6px 오렌지 막대" },
-      { name: "Eyebrow", type: "{ muted? }", desc: "26px 대문자 영문 라벨" },
+      { name: "Eyebrow", type: "{ muted? }", desc: "본문이나 도표에 쓰는 작은 라벨" },
       { name: "H1 / H2 / H3", type: "", desc: "104 / 64 / 40 px" },
       { name: "Lead", type: "", desc: "36px light 리드 문단" },
       { name: "Text", type: '{ size?: "md" | "sm", muted?, as? }', desc: "32 / 28 px 본문" },
@@ -381,7 +378,6 @@ export const DOCS: ComponentDoc[] = [
     summary: "ContentSlide 의 헤더만 따로. Slide 로 직접 구성할 때 쓴다.",
     props: [
       { name: "title", type: "ReactNode", required: true, desc: "" },
-      { name: "eyebrow", type: "ReactNode", desc: "" },
       { name: "aside", type: "ReactNode", desc: "오른쪽 (기본은 로고)" },
       { name: "logo", type: "boolean", default: "true", desc: "" },
     ],

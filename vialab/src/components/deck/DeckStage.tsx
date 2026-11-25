@@ -46,7 +46,7 @@ export interface DeckStageProps {
  * 키 조작
  *   → ↓ Space PageDown : 다음      ← ↑ PageUp : 이전
  *   Home / End          : 처음 / 끝  R : 처음으로
- *   N : 발표자 노트       G 또는 Esc : 전체 보기(그리드)
+ *   G 또는 Esc : 전체 보기(그리드)
  *   F : 전체 화면         Ctrl/Cmd+P : 한 장당 한 페이지 PDF
  * 주소의 #/5 는 5번째 슬라이드를 가리킨다 (새로고침해도 유지).
  */
@@ -59,7 +59,6 @@ export function DeckStage({ title, children }: DeckStageProps) {
   const [index, setIndex] = useState(() => readHash(total));
   const [scale, setScale] = useState(1);
   const [hud, setHud] = useState(true);
-  const [notesOpen, setNotesOpen] = useState(false);
   const [overview, setOverview] = useState(false);
   // ?capture : 스크린샷·PDF 용. 하단 컨트롤을 그리지 않는다.
   const [capture] = useState(() => new URLSearchParams(window.location.search).has("capture"));
@@ -146,10 +145,6 @@ export function DeckStage({ title, children }: DeckStageProps) {
           go(0);
           setOverview(false);
           break;
-        case "n":
-        case "N":
-          setNotesOpen((v) => !v);
-          break;
         case "g":
         case "G":
           setOverview((v) => !v);
@@ -177,7 +172,6 @@ export function DeckStage({ title, children }: DeckStageProps) {
 
   const current = slides[index];
   const label = current?.props.label ?? "";
-  const notes = current?.props.notes;
 
   return (
     <div className="vl-stage" onClick={onStageClick}>
@@ -199,18 +193,6 @@ export function DeckStage({ title, children }: DeckStageProps) {
         ))}
       </div>
 
-      {notesOpen && (
-        <aside className="vl-notes" aria-label="발표자 노트">
-          <div className="vl-notes__head">
-            <span>
-              notes · {String(index + 1).padStart(2, "0")} {label}
-            </span>
-            <span>N 으로 닫기</span>
-          </div>
-          {notes ? notes : <span className="vl-notes__empty">이 슬라이드에는 노트가 없다.</span>}
-        </aside>
-      )}
-
       {!capture && (
       <nav className="vl-hud" data-visible={hud} aria-label="슬라이드 이동">
         <button type="button" onClick={() => go(index - 1)} aria-label="이전 슬라이드">
@@ -225,9 +207,6 @@ export function DeckStage({ title, children }: DeckStageProps) {
         {label && <span className="vl-hud__label">{label}</span>}
         <button type="button" onClick={() => setOverview(true)} title="전체 보기 (G)">
           ▦
-        </button>
-        <button type="button" onClick={() => setNotesOpen((v) => !v)} title="발표자 노트 (N)">
-          N
         </button>
       </nav>
       )}
